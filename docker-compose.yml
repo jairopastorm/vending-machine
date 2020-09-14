@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    build: ./nginx
+    container_name: dev_nginx_1
+    volumes:
+      - ./vending-machine/:/var/www/vending-machine/
+    expose:
+      - "8080"
+    ports:
+      - '8080:80'
+    depends_on:
+      - php
+    networks:
+      - vending-machine
+
+  php:
+    build: ./php
+    container_name: dev_php_1
+    volumes:
+      - ./vending-machine/:/var/www/vending-machine/
+    environment:
+      APP_ENV: dev
+    networks:
+      - vending-machine
+
+networks:
+  vending-machine:
