@@ -2,7 +2,6 @@
 
 namespace App\Model\Stock;
 
-use App\Exception\ItemNotAcceptedException;
 use App\Exception\ItemSoldoutException;
 use App\Factory\ItemFactory;
 
@@ -11,14 +10,9 @@ class ItemManager
     private $availableItems;
     private $itemFactory;
 
-    public static function getInstance()
+    public static function getInstance(): ItemManager
     {
         return new self(new ItemFactory());
-    }
-
-    public function count()
-    {
-        return $this->availableItems;
     }
 
     public function __construct(ItemFactory $itemFactory)
@@ -36,18 +30,6 @@ class ItemManager
             }
         }
         throw new ItemSoldoutException();
-    }
-
-    public function checkItemExists($itemName): void
-    {
-        if (!in_array($itemName, ItemFactory::ACCEPTED_ITEMS)) {
-            throw new ItemNotAcceptedException();
-        }
-    }
-
-    public function addItemToStock(Item $item): void
-    {
-        $this->availableItems[] = $item;
     }
 
     public function createItem($itemName): Item

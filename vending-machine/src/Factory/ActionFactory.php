@@ -25,7 +25,7 @@ class ActionFactory
         }
     }
 
-    private function isGetProduct($action)
+    private function isGetProduct($action): bool
     {
         return strtoupper(substr(trim($action), 0, 3)) == "GET";
     }

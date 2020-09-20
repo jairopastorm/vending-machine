@@ -4,5 +4,5 @@ namespace App\Model\VendingMachine\Behavior;
 
 interface VendingMachineBehaviorInterface
 {
-    public function execute();
+    public function execute(): string;
 }

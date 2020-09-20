@@ -26,7 +26,7 @@ class VendingMachineCommand extends Command
             ->setDescription('This command allows you to interact with the Vending Machine application');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->printWelcomeMessage($output);
         do {
@@ -79,7 +79,7 @@ class VendingMachineCommand extends Command
         $output->writeln('');
     }
 
-    private function userWantsToRepeat(InputInterface $input, OutputInterface $output)
+    private function userWantsToRepeat(InputInterface $input, OutputInterface $output): bool
     {
         $userInput = $this->askInfo($input, $output, '--> Do you want to do another operation? (y|n) ');
         return $userInput == 'y';

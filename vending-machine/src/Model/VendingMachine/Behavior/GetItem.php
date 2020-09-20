@@ -37,7 +37,7 @@ class GetItem implements VendingMachineBehaviorInterface
         return $itemName;
     }
 
-    private function getResponse(Item $item, array $rest)
+    private function getResponse(Item $item, array $rest): string
     {
         $response = strtoupper($item->getName());
         foreach ($rest as $moneyRest) {

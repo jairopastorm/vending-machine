@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests\Unit\VendingMachine;
+
 use App\Model\Money\MoneyManager;
 use App\Model\Stock\ItemManager;
 use App\Model\VendingMachine\Behavior\GetItem;

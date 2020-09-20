@@ -11,7 +11,7 @@ class MoneyManager
     private $customerBudget;
     private $internalBudget;
 
-    public static function getInstance()
+    public static function getInstance(): MoneyManager
     {
         return new self();
     }
@@ -112,7 +112,7 @@ class MoneyManager
         return $rest - $money->getValue();
     }
 
-    private function substractAmountFromAvailableMoney(array &$availableMoney, int $pos)
+    private function substractAmountFromAvailableMoney(array &$availableMoney, int $pos): void
     {
         array_splice($availableMoney, $pos, 1);
     }

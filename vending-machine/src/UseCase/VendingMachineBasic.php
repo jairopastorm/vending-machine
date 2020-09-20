@@ -2,11 +2,8 @@
 
 namespace App\UseCase;
 
-use App\Model\Money\Budget;
-use App\Model\Money\InternalMoney;
 use App\Model\Money\MoneyManager;
 use App\Model\Stock\ItemManager;
-use App\Model\Stock\ItemStock;
 use App\Model\VendingMachine\VendingMachine;
 use App\Factory\ActionFactory;
 use App\Factory\MoneyFactory;
