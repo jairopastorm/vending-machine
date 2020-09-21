@@ -37,6 +37,8 @@ class VendingMachineCommand extends Command
                 $this->printResponse($output, $response);
             } catch(\Exception $e) {
                 $this->printError($output, $e->getMessage());
+                $this->printResponse($output, 'RETURNING INSERTED MONEY: ' . $inputMoney);
+                exit;
             }
         } while ($this->userWantsToRepeat($input, $output));
         return Command::SUCCESS;

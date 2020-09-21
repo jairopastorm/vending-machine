@@ -29,7 +29,7 @@ class MoneyManager
 
     public function returnCustomerMoney()
     {
-        $moneyValues = "";
+        $moneyValues = "RETURNED MONEY: ";
         foreach ($this->customerBudget->getMoney() as $money) {
             $moneyValues .= (string)$money->getDisplayValue() . ' ';
         }
@@ -62,17 +62,22 @@ class MoneyManager
     {
         $moneyToReturn = [];
         $remainingRest = $this->customerBudget->getTotalAmount() - $amount;
+        // First, try to collect the rest from customer's inserted money
         if ($this->stillRemainingRest($remainingRest)) {
             list($restFromCustomerBudget, $remainingRest) = $this->subtractRestFromBudget($this->customerBudget, $remainingRest);
             $moneyToReturn = array_merge($moneyToReturn, $restFromCustomerBudget);
         }
+        // If it's not complete yet, try to collect the remaining rest from internal money
         if ($this->stillRemainingRest($remainingRest)) {
             list($restFromInternalBudget, $remainingRest) = $this->subtractRestFromBudget($this->internalBudget, $remainingRest);
             $moneyToReturn = array_merge($moneyToReturn, $restFromInternalBudget);
         }
+        // If there are not sufficient rest, throw exception
         if ($this->stillRemainingRest($remainingRest)) {
             throw new InsufficientRestToReturnException();
         }
+        // If there are customer's money that not are used to collect the rest, move it to internal budget
+        $this->customerBudget->moveMoneyToBudget($this->internalBudget);
         return $moneyToReturn;
     }
 

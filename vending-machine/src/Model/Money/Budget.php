@@ -48,4 +48,12 @@ class Budget
         });
         return $availableMoney;
     }
+
+    public function moveMoneyToBudget(Budget $destinationBudget): void
+    {
+        foreach ($this->money as $money) {
+            $destinationBudget->addMoney($money);
+        }
+        $this->emptyMoney();
+    }
 }
